@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# king-mazen
-=======
 <h1 align="center">
   <br>
   <a href="https://github.com/HathemAhmed/MikrotikSploit"><img src="https://www.charbase.com/images/glyph/9763" alt="MikrotikSploit"></a>
@@ -104,4 +101,3 @@ https://www.youtube.com/channel/UC6KWVWMUn210EJYDyUHQhKQ
 الجروب @alsharabii ,   
 الموقع http://sadam-alsharabi.roo7.biz
 https://t.me/termuxalsharabi
->>>>>>> d7c79d0 (My version of MikrotikSploit)

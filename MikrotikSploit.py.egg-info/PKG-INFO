@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: MikrotikSploit.py
+Version: 0.1
+Summary: MikrotikSploit is a script that searches for and exploits Mikrotik network vulnerabilities
+Home-page: https://github.com/HathemAhmed/MikrotikSploit
+Author: Hathem Ahmed
+Author-email: hathem63636@gmail.com
+License: GPL-3.0
+Description: MikrotikSploit is a script that searches for and exploits Mikrotik network vulnerabilities Loophole pull numbers of network login cards ... Loophole know the username and password of the admin panel of the network Mikrotik ... A special section of the DoS system
+Keywords: Mikrotik,checker,web scanner,Wifi scanner,MikrotikSploit,Exploiting
+Platform: UNKNOWN

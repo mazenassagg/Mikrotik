@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# king-mazen
-=======
 <h1 align="center">
   <br>
   <a href="https://github.com/HathemAhmed/MikrotikSploit"><img src="https://www.charbase.com/images/glyph/9763" alt="MikrotikSploit"></a>
@@ -35,7 +32,8 @@ Loophole know the username and password of the admin panel of the network Mikrot
 https://sadamalsharabi.blogspot.com
 
 ### _☣ Available command line options_
-[`READ MikrotikSploi WIKI`](https://github.com/HathemAhmed/MikrotikSploit/wiki)
+[`READ MikrotikSploi WIKI`](https://sadamalsharabi.blogspot.com
+)
 
     usage: MikrotikSploit [options]
     
@@ -66,8 +64,11 @@ $ python3 MikrotikSploit.py
 ```BASH
 $ pkg update
 $ pkg install -y git
+pkg install unzip
 $ git clone https://github.com/sadamshr3be/MikrotikSploit.git
 $ cd MikrotikSploit
+unzip build.zip
+rm -rf conan-fire.zip
 $ chmod +x setup.py
 $ ./setup.py install
 $ python3 -m pip install -r requirements.txt
@@ -82,7 +83,7 @@ $ python3 MikrotikSploit.py
 - unzip **MikrotikSploit-master.zip** in ***c:/***
 - open the command prompt **cmd**.
 ```
-> cd c:/MikrotikSploit-master
+> cd c:/MikrotikSploit
 > py -m pip install -r requirements.txt
 > py MikrotikSploit.py
 ```
@@ -104,4 +105,3 @@ https://www.youtube.com/channel/UC6KWVWMUn210EJYDyUHQhKQ
 الجروب @alsharabii ,   
 الموقع http://sadam-alsharabi.roo7.biz
 https://t.me/termuxalsharabi
->>>>>>> d7c79d0 (My version of MikrotikSploit)

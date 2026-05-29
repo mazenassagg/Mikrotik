@@ -1,0 +1,7 @@
+
+[15:30:33] Error Exploit Mikrotik Admin Panel
+[15:30:33] Error IP=? MACK=?
+[19:16:44] Error Getting Password Cards Page Login My Network
+[19:16:44] Error Url=p.com Min Number=1 Max Number=
+[03:45:41] Error Getting Password Cards Page Login My Network
+[03:45:41] Error Url= Min Number= Max Number=
