@@ -203,7 +203,7 @@ class LOOP:
                     ASCY = input("[ {R}!{N} ] Are you sure For Remove king-mazen and UPDATE [Y/N]: ")
 
                     if ASCY.upper()[0] == "Y":
-                        UB = os.system('cd ../&& rm -r king-mazen && git clone https://github.com/mazenassagg/king-mazen.git)
+                        UB = os.system('cd ../&& rm -r king-mazen && git clone https://github.com/mazenassagg/king-mazen.git')
                         if UB != 0x00:
                             print("[{R}!{N}] Error For UPDATE")
                             exit()
