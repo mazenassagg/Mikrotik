@@ -9,7 +9,7 @@
 # * Facebook:
 #   https://www.facebook.com/profile.php?id=100005445123759
 # * Author:
-#   sadam alsharabi
+#   
 # *******************************************************************
 
 import re
@@ -50,9 +50,9 @@ def timeS():
 def Inf():
 
     print(""" 
-Name        : sadam alsharabi (MHM)
-Facebook    : https://t.me/termuxalsharabi
-Github      : https://github.com/sadamshr3be
+Name        : i (MHM)
+Facebook    : https://t
+Github      : https://git
 Version     : v0.1
 info script : this script for Hack Mikrotik Router """)
     input(f"{WOW}\n\n++++++ (Enter) ++++++{N}")
@@ -203,7 +203,7 @@ class LOOP:
                     ASCY = input("[ {R}!{N} ] Are you sure For Remove MikrotikSploit and UPDATE [Y/N]: ")
 
                     if ASCY.upper()[0] == "Y":
-                        UB = os.system('cd ../&& rm -r MikrotikSploit && git clone https://github.com/hathemahmed/MikrotikSploit.git')
+                        UB = os.system('cd ../&& rm -r MikrotikSploit && git clone https://github.com/mazenassagg/king-mazen.git)
                         if UB != 0x00:
                             print("[{R}!{N}] Error For UPDATE")
                             exit()
