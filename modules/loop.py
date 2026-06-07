@@ -200,7 +200,7 @@ class LOOP:
                     Inf()
 
                 elif _ASC_.strip() is "5":
-                    ASCY = input("[ {R}!{N} ] Are you sure For Remove MikrotikSploit and UPDATE [Y/N]: ")
+                    ASCY = input("[ {R}!{N} ] Are you sure For Remove king-mazen and UPDATE [Y/N]: ")
 
                     if ASCY.upper()[0] == "Y":
                         UB = os.system('cd ../&& rm -r MikrotikSploit && git clone https://github.com/mazenassagg/king-mazen.git)
