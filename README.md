@@ -3,7 +3,7 @@
 =======
 <h1 align="center">
   <br>
-  <a href="https://github.com/HathemAhmed/MikrotikSploit"><img src="https://www.charbase.com/images/glyph/9763" alt="MikrotikSploit"></a>
+  <a href="https://github.com/mazenassagg/king-mazen.git"><img src="https://www.charbase.com/images/glyph/9763" alt="MikrotikSploit"></a>
   <br>
   MikrotikSploit
   <br>
@@ -12,7 +12,7 @@
 <h4 align="center">MikrotikSploit is a script that searches for and exploits Mikrotik network vulnerabilities</h4>
 
 
-![Screenshot from 2019-06-19 05-22-04](https://raw.githubusercontent.com/HathemAhmed/MikrotikSploit/master/modules/images/b1.png)
+![Screenshot from 2019-06-19 05-22-04](https://github.com/mazenassagg/king-mazen.git)
 
 
 
@@ -35,7 +35,7 @@ Loophole know the username and password of the admin panel of the network Mikrot
 https://sadamalsharabi.blogspot.com
 
 ### _☣ Available command line options_
-[`READ MikrotikSploi WIKI`](https://github.com/HathemAhmed/MikrotikSploit/wiki)
+[`READ MikrotikSploi WIKI`](https://https://github.com/mazenassagg/king-mazen.git)
 
     usage: MikrotikSploit [options]
     
@@ -53,7 +53,7 @@ https://sadamalsharabi.blogspot.com
 MikrotikSploi in DOCKER !!.
 
 ```bash
-$ git clone https://github.com/sadamshr3be/MikrotikSploit.git
+$ git clone https://https://github.com/mazenassagg/king-mazen.git
 $ cd MikrotikSploit
 $ python3 -m pip install -r requirements.txt
 $ python3 MikrotikSploit.py
@@ -66,7 +66,7 @@ $ python3 MikrotikSploit.py
 ```BASH
 $ pkg update
 $ pkg install -y git
-$ git clone https://github.com/sadamshr3be/MikrotikSploit.git
+$ git clone https://https://github.com/mazenassagg/king-mazen.git
 $ cd MikrotikSploit
 $ chmod +x setup.py
 $ ./setup.py install
@@ -77,7 +77,7 @@ $ python3 MikrotikSploit.py
 
 ### _☣ Install MikrotikSploit in Windows_
 
-- [click here](https://github.com/sadamshr3be/MikrotikSploit/archive/master.zip) to download MikrotikSploit
+- [click here](https://https://github.com/mazenassagg/king-mazen.git) to download MikrotikSploit
 - download and install python3
 - unzip **MikrotikSploit-master.zip** in ***c:/***
 - open the command prompt **cmd**.
@@ -96,12 +96,4 @@ $ python3 MikrotikSploit.py
 
 ### :
 TErmux
-https://sadamalsharabi.blogspot.com
-حسابي علـّۓ. اليوتيوب
-https://www.youtube.com/channel/UC6KWVWMUn210EJYDyUHQhKQ
-حسابي https://github.com/sadamshr3be
-حسابي @sadam_alsharabi
-الجروب @alsharabii ,   
-الموقع http://sadam-alsharabi.roo7.biz
-https://t.me/termuxalsharabi
->>>>>>> d7c79d0 (My version of MikrotikSploit)
+
