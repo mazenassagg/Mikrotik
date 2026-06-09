@@ -35,7 +35,7 @@ class RunScript(object):
                              |          {N}
             {B}6B 53 70 6C 6F 69 74 {N}
                         {F2}Version: 0.1{N}
-    {T}@ Author => MAZEN ALKHALIDI HAKING
+    {T}@ Author => OSAMA ALMOLIKI HAKING
 
         """, 1)
 
