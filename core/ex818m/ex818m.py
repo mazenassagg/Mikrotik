@@ -12,6 +12,10 @@
 #   Hathem Ahmed
 # *******************************************************************
 
+
+
+import concurrent.futures
+import threading
 import os
 import sys
 import time
@@ -100,8 +104,6 @@ def _REQUESTS_SU(*args, **kwargs):
 
 
 
-import concurrent.futures
-import threading
 
 # تعريف المتغيرات المشتركة والقفل لضمان عدم التداخل بين المسارات
 lock = threading.Lock()
@@ -171,7 +173,7 @@ def _PROCESS_DATA(*args, **kwargs):
     _R_global = True
 
     # عدد العمليات المتوازية (المسارات). يمكنك رفع الرقم لتسريع أكبر إذا كان اتصالك والسيرفر يتحملان.
-    MAX_WORKERS = 20 
+    MAX_WORKERS = 10
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         for PASSWIRD in range(int(MINNUM), int(MAXNUM)):
