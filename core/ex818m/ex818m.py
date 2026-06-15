@@ -56,7 +56,6 @@ def URL_CLEAR(*args, **kwargs):
     return _RE_
 
 
-
 def _WRITE_PASSWORD(*args, **kwargs):
     _FILE_ = open(os.path.join(os.getcwd(), 'Password.txt'), 'a')
     _FILE_.write(f"\n{'+'*5} Mr.WHM {'+'*5}\nPASSWORD: {args[0]}\n")
@@ -65,6 +64,7 @@ def _WRITE_PASSWORD(*args, **kwargs):
 
 # نقوم بإنشاء قفل خاص بالطباعة لضمان عدم تداخل النصوص أثناء مسح الشاشة
 print_lock = asyncio.Lock()
+
 
 
 async def _INDEX(*args, **kwargs):
